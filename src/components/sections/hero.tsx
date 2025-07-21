@@ -17,11 +17,11 @@ export function Hero() {
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Solar Ring Live Animation Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-        <div className="relative w-[700px] h-[700px] md:w-[900px] md:h-[900px]">
+        <div className="relative aspect-square w-[110vw] max-w-[500px] max-h-[110vw] md:w-[80vw] md:max-w-[700px] md:max-h-[60vw] lg:w-[700px] lg:max-w-[900px] lg:max-h-[700px]">
           {/* Main ring */}
           <div className="absolute inset-0 rounded-full border-2 border-blue-400/30 animate-rotate-slow" style={{ boxShadow: '0 0 80px 10px rgba(59,130,246,0.08)' }} />
           {/* Inner ring */}
-          <div className="absolute inset-24 rounded-full border border-purple-400/20 animate-rotate-reverse" />
+          <div className="absolute inset-[12%] rounded-full border border-purple-400/20 animate-rotate-reverse" />
           {/* Orbiting planet 1 */}
           <div className="absolute left-1/2 top-0 -translate-x-1/2 w-6 h-6 bg-gradient-to-tr from-blue-500 to-purple-400 rounded-full shadow-lg animate-orbit" style={{ animationDuration: '7s' }} />
           {/* Orbiting planet 2 */}
@@ -54,7 +54,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold gradient-text"
+            className="text-4xl md:text-6xl font-bold gradient-text leading-tight"
           >
             {portfolioData.personal.name}
           </motion.h1>
@@ -64,7 +64,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-2xl md:text-3xl text-foreground/80 font-medium min-h-[2.5rem] flex items-center justify-center"
+            className="text-xl md:text-2xl text-foreground/80 font-medium min-h-[2rem] flex items-center justify-center"
           >
             <TypeAnimation
               sequence={[
@@ -91,7 +91,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed min-h-[4rem] flex items-center justify-center"
+            className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed min-h-[3rem] flex items-center justify-center"
           >
             <TypeAnimation
               sequence={[
