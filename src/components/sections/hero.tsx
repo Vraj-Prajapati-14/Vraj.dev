@@ -15,18 +15,21 @@ export function Hero() {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Solar Ring Live Animation Background */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-        <div className="relative aspect-square w-[110vw] max-w-[500px] max-h-[110vw] md:w-[80vw] md:max-w-[700px] md:max-h-[60vw] lg:w-[700px] lg:max-w-[900px] lg:max-h-[700px]">
-          {/* Main ring */}
-          <div className="absolute inset-0 rounded-full border-2 border-blue-400/30 animate-rotate-slow" style={{ boxShadow: '0 0 80px 10px rgba(59,130,246,0.08)' }} />
-          {/* Inner ring */}
-          <div className="absolute inset-[12%] rounded-full border border-purple-400/20 animate-rotate-reverse" />
-          {/* Orbiting planet 1 */}
-          <div className="absolute left-1/2 top-0 -translate-x-1/2 w-6 h-6 bg-gradient-to-tr from-blue-500 to-purple-400 rounded-full shadow-lg animate-orbit" style={{ animationDuration: '7s' }} />
-          {/* Orbiting planet 2 */}
-          <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-3 h-3 bg-gradient-to-tr from-pink-400 to-yellow-300 rounded-full shadow-md animate-orbit2" style={{ animationDuration: '11s' }} />
+      {/* Seamless Infinite SVG Wave Background (guaranteed visible) */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden w-full h-full">
+        {/* Bottom seamless wave */}
+        <div className="absolute bottom-0 left-0 w-full h-[120px] md:h-[180px] overflow-hidden">
+          <svg className="absolute left-0 top-0 h-full w-[200%] animate-svg-wave" viewBox="0 0 2400 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path fill="#2563eb" fillOpacity="0.18" d="M0 60 Q 150 120 300 60 T 600 60 T 900 60 T 1200 60 T 1500 60 T 1800 60 T 2100 60 T 2400 60 V120 H0Z" />
+          </svg>
         </div>
+        {/* Top seamless wave */}
+        {/* <div className="absolute top-0 left-0 w-full h-[100px] md:h-[140px] overflow-hidden">
+          <svg className="absolute left-0 top-0 h-full w-[200%] animate-svg-wave-reverse" viewBox="0 0 2400 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path fill="#9333ea" fillOpacity="0.13" d="M0 50 Q 150 0 300 50 T 600 50 T 900 50 T 1200 50 V0 H0Z" />
+            <path fill="#9333ea" fillOpacity="0.13" d="M1200 50 Q 1350 0 1500 50 T 1800 50 T 2100 50 T 2400 50 V0 H1200Z" />
+          </svg>
+        </div> */}
       </div>
       {/* Background is now handled globally by LiveGridBackground component */}
 
