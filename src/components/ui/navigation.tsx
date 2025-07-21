@@ -71,9 +71,9 @@ export function Navigation() {
                     e.preventDefault()
                     scrollToSection(item.href)
                   }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium"
+                  whileHover={{ scale: 1.09, boxShadow: '0 4px 24px 0 rgba(59,130,246,0.10)', backgroundColor: 'rgba(59,130,246,0.07)' }}
+                  whileTap={{ scale: 0.97 }}
+                  className="text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium px-4 py-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 shadow-sm hover:shadow-lg"
                 >
                   {item.name}
                 </motion.a>
@@ -85,10 +85,10 @@ export function Navigation() {
           <div className="flex items-center space-x-4">
             {mounted && (
               <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.13, boxShadow: '0 4px 24px 0 rgba(59,130,246,0.13)' }}
+                whileTap={{ scale: 0.93 }}
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
+                className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors shadow-sm hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
               >
                 {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
               </motion.button>
@@ -97,10 +97,10 @@ export function Navigation() {
             {/* Mobile menu button */}
             <div className="md:hidden">
               <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.13, boxShadow: '0 4px 24px 0 rgba(59,130,246,0.13)' }}
+                whileTap={{ scale: 0.93 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
+                className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors shadow-sm hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
               >
                 {isOpen ? <X size={20} /> : <Menu size={20} />}
               </motion.button>
@@ -127,8 +127,8 @@ export function Navigation() {
                     e.preventDefault()
                     scrollToSection(item.href)
                   }}
-                  whileHover={{ x: 10 }}
-                  className="block px-3 py-2 text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium"
+                  whileHover={{ x: 10, scale: 1.06, boxShadow: '0 4px 24px 0 rgba(59,130,246,0.10)', backgroundColor: 'rgba(59,130,246,0.07)' }}
+                  className="block px-3 py-2 text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 shadow-sm hover:shadow-lg"
                 >
                   {item.name}
                 </motion.a>

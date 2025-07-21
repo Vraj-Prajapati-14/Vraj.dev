@@ -15,6 +15,19 @@ export function Hero() {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Solar Ring Live Animation Background */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+        <div className="relative w-[700px] h-[700px] md:w-[900px] md:h-[900px]">
+          {/* Main ring */}
+          <div className="absolute inset-0 rounded-full border-2 border-blue-400/30 animate-rotate-slow" style={{ boxShadow: '0 0 80px 10px rgba(59,130,246,0.08)' }} />
+          {/* Inner ring */}
+          <div className="absolute inset-24 rounded-full border border-purple-400/20 animate-rotate-reverse" />
+          {/* Orbiting planet 1 */}
+          <div className="absolute left-1/2 top-0 -translate-x-1/2 w-6 h-6 bg-gradient-to-tr from-blue-500 to-purple-400 rounded-full shadow-lg animate-orbit" style={{ animationDuration: '7s' }} />
+          {/* Orbiting planet 2 */}
+          <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-3 h-3 bg-gradient-to-tr from-pink-400 to-yellow-300 rounded-full shadow-md animate-orbit2" style={{ animationDuration: '11s' }} />
+        </div>
+      </div>
       {/* Background is now handled globally by LiveGridBackground component */}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">

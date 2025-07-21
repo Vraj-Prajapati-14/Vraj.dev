@@ -252,3 +252,28 @@
     transform: scale(1.2);
   }
 }
+
+@keyframes rotate-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-rotate-reverse {
+  animation: rotate-reverse 28s linear infinite;
+}
+
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateY(-340px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateY(-340px) rotate(-360deg); }
+}
+.animate-orbit {
+  animation: orbit 7s linear infinite;
+}
+
+@keyframes orbit2 {
+  0% { transform: rotate(0deg) translateY(290px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateY(290px) rotate(-360deg); }
+}
+.animate-orbit2 {
+  animation: orbit2 11s linear infinite;
+}
