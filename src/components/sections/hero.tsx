@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react'
+import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react'
 import { TypeAnimation } from 'react-type-animation'
 import { portfolioData } from '@/data/portfolio'
 
@@ -15,7 +15,7 @@ export function Hero() {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Seamless Infinite SVG Wave Background (guaranteed visible) */}
+      {/* Infinite SVG Wave Background */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden w-full h-full">
         {/* Bottom seamless wave */}
         <div className="absolute bottom-0 left-0 w-full h-[120px] md:h-[180px] overflow-hidden">
@@ -23,17 +23,25 @@ export function Hero() {
             <path fill="#2563eb" fillOpacity="0.18" d="M0 60 Q 150 120 300 60 T 600 60 T 900 60 T 1200 60 T 1500 60 T 1800 60 T 2100 60 T 2400 60 V120 H0Z" />
           </svg>
         </div>
-        {/* Top seamless wave */}
-        {/* <div className="absolute top-0 left-0 w-full h-[100px] md:h-[140px] overflow-hidden">
-          <svg className="absolute left-0 top-0 h-full w-[200%] animate-svg-wave-reverse" viewBox="0 0 2400 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path fill="#9333ea" fillOpacity="0.13" d="M0 50 Q 150 0 300 50 T 600 50 T 900 50 T 1200 50 V0 H0Z" />
-            <path fill="#9333ea" fillOpacity="0.13" d="M1200 50 Q 1350 0 1500 50 T 1800 50 T 2100 50 T 2400 50 V0 H1200Z" />
-          </svg>
-        </div> */}
+        {/* Classic Solar Ring with Orbits (centered) */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          <div className="relative aspect-square w-[90vw] max-w-[400px] md:w-[60vw] md:max-w-[700px] lg:w-[700px] lg:max-w-[900px]">
+            {/* Main ring */}
+            {/* <div className="absolute inset-0 rounded-full border-2 border-blue-400/30 animate-rotate-slow" style={{ boxShadow: '0 0 80px 10px rgba(59,130,246,0.08)' }} /> */}
+            {/* Inner ring (proportional inset for all sizes) */}
+            {/* <div className="absolute inset-[12%] rounded-full border border-purple-400/20 animate-rotate-reverse" /> */}
+            {/* Orbiting planet 1 */}
+            <div className="absolute left-1/2 top-0 -translate-x-1/2 w-6 h-6 bg-gradient-to-tr from-blue-500 to-purple-400 rounded-full shadow-lg animate-orbit" style={{ animationDuration: '7s' }} />
+            {/* Orbiting planet 2 */}
+            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-4 h-4 bg-gradient-to-tr from-pink-400 to-yellow-300 rounded-full shadow-md animate-orbit2" style={{ animationDuration: '11s' }} />
+            {/* Orbiting planet 3 */}
+            <div className="absolute left-1/2 top-0 -translate-x-1/2 w-5 h-5 bg-gradient-to-tr from-green-400 to-blue-300 rounded-full shadow-md animate-orbit3" style={{ animationDuration: '9s' }} />
+          </div>
+        </div>
       </div>
       {/* Background is now handled globally by LiveGridBackground component */}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative pt-28">
         {/* Profile Picture */}
         {/* Removed profile image and aura as per user request */}
         <motion.div
@@ -63,7 +71,7 @@ export function Hero() {
           </motion.h1>
 
           {/* Title with Typing Effect */}
-          <motion.div
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
@@ -77,7 +85,7 @@ export function Hero() {
                 2000,
                 'Node.js Developer',
                 2000,
-                'MERN Stack Developer',
+                'MongoDB Developer',
                 2000,
                 'TypeScript Developer',
                 2000,
@@ -87,7 +95,7 @@ export function Hero() {
               repeat={Infinity}
               className="gradient-text"
             />
-          </motion.div>
+          </motion.h2>
 
           {/* Description with Typing Effect */}
           <motion.div
@@ -164,12 +172,9 @@ export function Hero() {
             <a
               href="/resume.pdf"
               download
-              className="flex items-center gap-3 px-6 py-2 rounded-full border-2 border-blue-400 text-blue-700 font-bold bg-transparent hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-all text-base"
-              style={{ minWidth: 170, justifyContent: 'center' }}
+              className="flex items-center justify-center px-6 py-3 rounded-full border-2 border-blue-400 text-blue-700 font-bold bg-transparent hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-all text-base"
+              style={{ minWidth: 160 }}
             >
-              <span className="flex items-center justify-center w-9 h-9 rounded-full bg-blue-400 text-white mr-2">
-                <Download size={22} />
-              </span>
               Download Resume
             </a>
           </motion.div>
@@ -195,7 +200,7 @@ export function Hero() {
       </div>
 
       {/* Scroll Indicator */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
@@ -212,7 +217,7 @@ export function Hero() {
             className="w-1 h-3 bg-muted-foreground/50 rounded-full mt-2"
           />
         </motion.div>
-      </motion.div>
+      </motion.div> */}
     </section>
   )
 } 

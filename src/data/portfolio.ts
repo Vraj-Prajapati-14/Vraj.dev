@@ -17,6 +17,7 @@ export const portfolioData = {
     database: ["MySQL", "MongoDB", "PostgreSQL"],
     devops: ["Docker", "AWS"],
     tools: ["Git", "VS Code", "Postman"],
+    integrations: ["Payment Integration (Razorpay, Stripe)", "WebSocket (Real-time Chat)", "Webhook"],
   },
   
   experience: [
@@ -95,7 +96,7 @@ export const portfolioData = {
       image: '/Voting.png',
       technologies: ["PHP", "MySQL", "Bootstrap", "HTML", "CSS", "JavaScript", "jQuery", "Git"],
       github: 'https://github.com/yourusername/portfolio',
-      live: 'https://vraj.dev',
+      live: 'https://vraj-prajapati.dev',
       featured: false,
     },
     {

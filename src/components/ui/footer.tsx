@@ -65,8 +65,8 @@ export function Footer() {
          
         >
           <p className="text-xs text-muted-foreground">
-            © {mounted ? new Date().getFullYear() : '2025'} {portfolioData.personal.name}. Made with{' '}
-            <Heart className="inline-block w-4 h-4 text-red-500" /> 
+            © {mounted ? new Date().getFullYear() : '2025'} {portfolioData.personal.name}
+            {/* <Heart className="inline-block w-4 h-4 text-red-500" />  */}
           </p>
         </motion.div>
       </div>

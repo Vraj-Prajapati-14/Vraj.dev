@@ -9,15 +9,17 @@ import { Footer } from '@/components/ui/footer'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <>
       <Navigation />
-      <Hero />
-      <About />
-      <Skills />
-      <Research />
-      <Projects />
-      <Contact />
+      <main className="min-h-screen bg-background text-foreground">
+        <Hero />
+        <About />
+        <Skills />
+        <Research />
+        <Projects />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+    </>
   )
 }

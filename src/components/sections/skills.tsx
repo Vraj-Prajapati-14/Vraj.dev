@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Code, Database, Server, Cloud, Palette, Wrench } from 'lucide-react'
+import { Code, Database, Server, Cloud, Palette, Wrench, Zap } from 'lucide-react'
 import { portfolioData } from '@/data/portfolio'
 
 const skillCategories = [
@@ -12,6 +12,7 @@ const skillCategories = [
   { name: 'Database', icon: Database, skills: portfolioData.skills.database },
   { name: 'DevOps', icon: Cloud, skills: portfolioData.skills.devops },
   { name: 'Tools', icon: Wrench, skills: portfolioData.skills.tools },
+  { name: 'Integrations', icon: Zap, skills: portfolioData.skills.integrations },
 ]
 
 export function Skills() {

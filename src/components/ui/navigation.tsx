@@ -56,7 +56,7 @@ export function Navigation() {
             className="flex-shrink-0"
           >
             <a href="#home" className="text-2xl font-bold gradient-text">
-              Vraj.dev
+              Vraj Prajapati
             </a>
           </motion.div>
 

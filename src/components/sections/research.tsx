@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Brain, Target, TrendingUp, Code, BarChart3, Zap, Download } from 'lucide-react'
+import { Brain, Target, TrendingUp, Code, BarChart3, Zap } from 'lucide-react'
 import { portfolioData } from '@/data/portfolio'
 
 export function Research() {
@@ -141,12 +141,9 @@ export function Research() {
                 <a
                   href="/research-paper.pdf"
                   download
-                  className="flex items-center gap-3 px-6 py-2 rounded-full border-2 border-purple-400 text-purple-700 font-bold bg-transparent hover:bg-purple-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 transition-all text-base"
-                  style={{ minWidth: 170, justifyContent: 'center' }}
+                  className="flex items-center justify-center px-6 py-3 rounded-full border-2 border-purple-400 text-purple-700 font-bold bg-transparent hover:bg-purple-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 transition-all text-base"
+                  style={{ minWidth: 160 }}
                 >
-                  <span className="flex items-center justify-center w-9 h-9 rounded-full bg-purple-400 text-white mr-2">
-                    <Download size={22} />
-                  </span>
                   Download Paper
                 </a>
               </div>

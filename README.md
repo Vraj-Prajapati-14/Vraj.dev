@@ -37,7 +37,7 @@ A modern, responsive portfolio website built with Next.js 15, TypeScript, Tailwi
 1. **Clone the repository**
    ```bash
    git clone <your-repo-url>
-   cd vraj.dev
+   cd vraj-prajapati
    ```
 
 2. **Install dependencies**
@@ -83,7 +83,7 @@ export const portfolioData = {
 ## 📁 Project Structure
 
 ```
-vraj.dev/
+vraj-prajapati/
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx          # Root layout with SEO
