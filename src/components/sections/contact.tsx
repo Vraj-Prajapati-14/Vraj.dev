@@ -32,7 +32,7 @@ export function Contact() {
       )
       setSuccess('Message sent successfully!')
       form.reset()
-    } catch (err) {
+    } catch {
       setError('Failed to send message. Please try again later.')
     } finally {
       setLoading(false)

@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Github, ExternalLink, Code, Users, Database, Car } from 'lucide-react'
+import { Github, ExternalLink, Code, Users, Car } from 'lucide-react'
+import Image from 'next/image'
 import { portfolioData } from '@/data/portfolio'
 
 const projectIcons = {
@@ -56,11 +57,12 @@ export function Projects() {
                 )}
                 {/* Project Image with Overlay */}
                 <div className="relative">
-                  <img
+                  <Image
                     src={project.image || '/projects/placeholder.png'}
                     alt={project.title}
+                    width={400}
+                    height={192}
                     className="w-full h-48 object-cover rounded-t-xl group-hover:scale-110 transition-transform duration-300"
-                    onError={e => { e.currentTarget.src = '/projects/placeholder.png'; }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-xl" />
                 </div>
@@ -81,7 +83,7 @@ export function Projects() {
 
                   {/* Technologies */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {techs.slice(0, 4).map((tech, techIndex) => (
+                    {techs.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
                         className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold shadow-sm"
