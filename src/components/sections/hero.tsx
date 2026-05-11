@@ -79,15 +79,17 @@ export function Hero() {
           >
             <TypeAnimation
               sequence={[
+                'Software Engineer',
+                2000,
                 'Full Stack Developer',
                 2000,
-                'React.js Developer',
+                'NestJS Developer',
                 2000,
                 'Node.js Developer',
                 2000,
-                'MongoDB Developer',
+                'AWS & Cloud Engineer',
                 2000,
-                'TypeScript Developer',
+                'TypeScript Expert',
                 2000,
               ]}
               wrapper="span"

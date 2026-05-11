@@ -2,14 +2,15 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Github, ExternalLink, Code, Users, Car } from 'lucide-react'
+import { Github, ExternalLink, Code, Users, Car, Activity, Globe, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import { portfolioData } from '@/data/portfolio'
 
 const projectIcons = {
-  'SocioFeed': Users,
-  'Virtual Wheels': Car,
-  'Research': Code,
+  'Lucidium World – Metaphysical Life-Simulation Platform': Globe,
+  'Mens – Healthcare Consultation Platform': Activity,
+  'Snot – Pet Learning & Social Platform': Sparkles,
+  'Research (Drug Sentiment Analysis)': Code,
 }
 
 export function Projects() {
