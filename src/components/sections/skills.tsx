@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Code, Database, Server, Cloud, Palette, Wrench, Zap } from 'lucide-react'
+import { Code, Database, Server, Cloud, Palette, Wrench, Zap, Bot } from 'lucide-react'
 import { portfolioData } from '@/data/portfolio'
 
 const skillCategories = [
@@ -13,6 +13,7 @@ const skillCategories = [
   { name: 'DevOps', icon: Cloud, skills: portfolioData.skills.devops },
   { name: 'Tools', icon: Wrench, skills: portfolioData.skills.tools },
   { name: 'Integrations', icon: Zap, skills: portfolioData.skills.integrations },
+  { name: 'AI Tools', icon: Bot, skills: portfolioData.skills.aiTools },
 ]
 
 export function Skills() {
@@ -96,7 +97,8 @@ export function Skills() {
             {[
               'RESTful APIs', 'GraphQL', 'JWT Authentication', 'OAuth', 'CI/CD',
               'Agile/Scrum', 'Git Workflow', 'API Testing', 'Performance Optimization',
-              'Responsive Design', 'Progressive Web Apps', 'Microservices', 'Docker Compose'
+              'Responsive Design', 'Progressive Web Apps', 'Microservices', 'Docker Compose',
+              'Claude AI', 'Claude Code CLI', 'MCP (Model Context Protocol)', 'AI Agents', 'Cursor IDE', 'OpenAI Codex'
             ].map((skill, index) => (
               <motion.span
                 key={skill}

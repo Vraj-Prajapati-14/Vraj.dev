@@ -19,6 +19,15 @@ export const portfolioData = {
     security: ["JWT", "OAuth2", "AWS Cognito", "RBAC", "Role-Based Authorization"],
     tools: ["Git", "GitHub", "Agile/Scrum", "Postman", "VS Code", "Code Review"],
     integrations: ["Stripe", "Payment Gateways", "Webhooks", "Background Job Queues"],
+    aiTools: [
+      "Claude (Anthropic)",
+      "Claude API & SDK",
+      "Claude Agents & MCP",
+      "Claude Code (CLI)",
+      "CLAUDE.md / Rules",
+      "Cursor (AI IDE)",
+      "OpenAI Codex",
+    ],
   },
   
   experience: [
@@ -111,7 +120,11 @@ export const portfolioData = {
   awards: [
     {
       title: "Certifications",
-      items: ["NPTEL – Programming in Modern C++ | IIT Kharagpur", "NPTEL – Data Structures and Algorithms | IIT Kharagpur"]
+      items: [
+        "NPTEL – Programming in Modern C++ | IIT Kharagpur",
+        "NPTEL – Data Structures and Algorithms | IIT Kharagpur",
+        "Claude AI Fundamentals – Anthropic (Claude API, Agents, MCP, Claude Code)",
+      ]
     }
   ]
 } 

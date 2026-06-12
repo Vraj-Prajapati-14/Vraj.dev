@@ -1,23 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react";
-
 export function LiveGridBackground() {
-  const squareRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let frame: number;
-    let angle = 0;
-    function animate() {
-      angle += 0.05; // Very slow rotation
-      if (squareRef.current) {
-        squareRef.current.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-      }
-      frame = requestAnimationFrame(animate);
-    }
-    animate();
-    return () => cancelAnimationFrame(frame);
-  }, []);
 
   return (
     <div
@@ -42,19 +25,6 @@ export function LiveGridBackground() {
         }}
       />
 
-      {/* Large square behind name area */}
-      <div
-        ref={squareRef}
-        className="absolute top-1/2 left-1/2"
-        style={{
-          width: '500px',
-          height: '250px',
-          background: 'rgba(59, 130, 246, 0.08)',
-          border: '2px solid rgba(59, 130, 246, 0.2)',
-          borderRadius: '15px',
-          boxShadow: '0 0 50px rgba(59, 130, 246, 0.1)',
-        }}
-      />
 
       {/* Particles */}
       {[...Array(15)].map((_, i) => {
