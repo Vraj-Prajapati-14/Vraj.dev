@@ -8,106 +8,105 @@ const aiTools = [
     name: 'Claude',
     by: 'Anthropic',
     description:
-      'Daily driver for code generation, architecture discussions, and AI-assisted development. Proficient with the Claude API, Agents SDK, MCP (Model Context Protocol), and Claude Code CLI.',
+      'Primary AI assistant for architecture reviews, code generation, and agent-based workflows. Proficient with Claude API, Agents SDK, MCP, and Claude Code CLI for terminal-native engineering.',
     tags: ['Claude API', 'Agents SDK', 'MCP', 'Claude Code CLI', 'CLAUDE.md / Rules'],
-    gradient: 'from-orange-500/20 via-amber-400/10 to-yellow-500/10',
-    border: 'border-orange-500/30',
-    badge: 'bg-orange-500/10 text-orange-400 border border-orange-500/20',
-    logo: (
-      <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-label="Claude">
-        <circle cx="20" cy="20" r="20" fill="#D97706" opacity="0.15" />
-        <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fontSize="18" fontWeight="700" fill="#D97706">C</text>
-      </svg>
-    ),
+    accentColor: '#C9A84C',
+    borderStyle: { borderTop: '2px solid #C9A84C' },
+    initial: 'C',
   },
   {
     name: 'Cursor',
     by: 'Anysphere',
     description:
-      'AI-powered IDE built on VS Code. Used for AI-assisted multi-file editing, inline chat, codebase context search, and agentic code generation across full-stack projects.',
+      'AI-powered IDE for multi-file editing, codebase chat, and agentic code generation. Used daily for inline AI suggestions, refactors, and natural language to code across full-stack projects.',
     tags: ['AI Autocomplete', 'Multi-file Edit', 'Codebase Chat', 'Agent Mode'],
-    gradient: 'from-violet-500/20 via-purple-400/10 to-indigo-500/10',
-    border: 'border-violet-500/30',
-    badge: 'bg-violet-500/10 text-violet-400 border border-violet-500/20',
-    logo: (
-      <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-label="Cursor">
-        <circle cx="20" cy="20" r="20" fill="#7C3AED" opacity="0.15" />
-        <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fontSize="18" fontWeight="700" fill="#7C3AED">▷</text>
-      </svg>
-    ),
+    accentColor: '#7C3AED',
+    borderStyle: { borderTop: '2px solid #7C3AED' },
+    initial: '▷',
   },
   {
     name: 'Codex',
     by: 'OpenAI',
     description:
-      'OpenAI\'s code-generation model powering GitHub Copilot and CLI tools. Used for boilerplate generation, function scaffolding, and natural language to code workflows.',
-    tags: ['Code Generation', 'GitHub Copilot', 'CLI', 'NL→Code'],
-    gradient: 'from-emerald-500/20 via-teal-400/10 to-cyan-500/10',
-    border: 'border-emerald-500/30',
-    badge: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    logo: (
-      <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-label="Codex">
-        <circle cx="20" cy="20" r="20" fill="#10B981" opacity="0.15" />
-        <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fontSize="18" fontWeight="700" fill="#10B981">⌥</text>
-      </svg>
-    ),
+      "OpenAI's code model powering GitHub Copilot. Used for boilerplate generation, function scaffolding, and natural language to code workflows in daily development.",
+    tags: ['Code Generation', 'GitHub Copilot', 'NL→Code', 'CLI'],
+    accentColor: '#10B981',
+    borderStyle: { borderTop: '2px solid #10B981' },
+    initial: '⌥',
   },
 ]
 
 const claudeFeatures = [
-  { label: 'Claude API & SDK', desc: 'Direct API integration for custom AI features in apps' },
-  { label: 'Agents SDK', desc: 'Build multi-step autonomous agents with tool use' },
-  { label: 'MCP', desc: 'Model Context Protocol — connect AI to external data & tools' },
-  { label: 'Claude Code CLI', desc: 'Terminal-native AI assistant for engineering workflows' },
-  { label: 'CLAUDE.md / Rules', desc: 'Project-level instructions and persistent memory setup' },
+  { label: 'Claude API & SDK',  desc: 'Direct API calls, streaming, tool use, prompt caching' },
+  { label: 'Agents SDK',         desc: 'Multi-step autonomous agents with tool calling' },
+  { label: 'MCP',               desc: 'Model Context Protocol — connect AI to external tools & data' },
+  { label: 'Claude Code CLI',   desc: 'Terminal-native AI assistant for engineering tasks' },
+  { label: 'CLAUDE.md / Rules', desc: 'Project-level memory, instructions & persistent context' },
 ]
 
 export function AiTools() {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.08 })
 
   return (
-    <section id="ai-tools" className="py-20 relative bg-muted/20">
+    <section id="ai-tools" className="py-24 relative" style={{ background: '#0D0D0D' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Heading */}
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.7 }}
+          className="mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
+          <p className="section-label mb-2">04 — AI Integration</p>
+          <h2 className="luxury-heading text-4xl md:text-5xl font-bold text-[#F0EDE8]">
             AI Tools I Use
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            I actively integrate AI-powered tools into my development workflow — from code generation and architectural decisions to building agentic systems.
+          <div className="gold-rule-left mt-4" />
+          <p className="text-[#878787] text-sm mt-5 max-w-xl">
+            Beyond code editors — I build with and on top of AI systems, integrating them into real production workflows.
           </p>
         </motion.div>
 
-        {/* Tool Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
+        {/* Tool cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-14">
           {aiTools.map((tool, i) => (
             <motion.div
               key={tool.name}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 36 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              className={`relative glass rounded-2xl p-6 border ${tool.border} bg-gradient-to-br ${tool.gradient} hover:scale-[1.02] transition-all duration-300 hover:shadow-lg`}
+              transition={{ duration: 0.6, delay: i * 0.12 }}
+              className="luxury-card p-6 flex flex-col"
+              style={tool.borderStyle}
             >
-              <div className="flex items-start gap-4 mb-4">
-                <div className="shrink-0">{tool.logo}</div>
+              {/* Logo + name */}
+              <div className="flex items-center gap-4 mb-4">
+                <div
+                  className="w-11 h-11 rounded-lg flex items-center justify-center luxury-heading text-xl font-bold shrink-0"
+                  style={{ background: `${tool.accentColor}18`, color: tool.accentColor }}
+                >
+                  {tool.initial}
+                </div>
                 <div>
-                  <h3 className="text-xl font-bold text-foreground">{tool.name}</h3>
-                  <span className="text-xs text-muted-foreground">by {tool.by}</span>
+                  <h3 className="luxury-heading text-lg font-bold text-[#F0EDE8]">{tool.name}</h3>
+                  <p className="mono-text text-xs text-[#878787]">by {tool.by}</p>
                 </div>
               </div>
 
-              <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-                {tool.description}
-              </p>
+              <p className="text-sm text-[#878787] leading-relaxed mb-5 flex-1">{tool.description}</p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {tool.tags.map((tag) => (
-                  <span key={tag} className={`text-xs px-2.5 py-1 rounded-full font-medium ${tool.badge}`}>
+                  <span
+                    key={tag}
+                    className="mono-text text-xs px-2.5 py-1 rounded border"
+                    style={{
+                      color: tool.accentColor,
+                      background: `${tool.accentColor}12`,
+                      borderColor: `${tool.accentColor}30`,
+                    }}
+                  >
                     {tag}
                   </span>
                 ))}
@@ -116,34 +115,36 @@ export function AiTools() {
           ))}
         </div>
 
-        {/* Claude Deep Dive */}
+        {/* Claude deep dive */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="glass rounded-2xl border border-orange-500/20 bg-gradient-to-br from-orange-500/10 via-amber-400/5 to-transparent p-8"
+          transition={{ duration: 0.7, delay: 0.45 }}
+          className="luxury-card p-8"
+          style={{ borderTop: '2px solid #C9A84C' }}
         >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-2 h-8 rounded-full bg-gradient-to-b from-orange-400 to-amber-500" />
-            <h3 className="text-2xl font-bold text-foreground">Claude — Deep Familiarity</h3>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-1.5 h-7 rounded-full bg-[#C9A84C]" />
+            <h3 className="luxury-heading text-xl font-bold text-[#F0EDE8]">Claude — Full Ecosystem</h3>
           </div>
-          <p className="text-muted-foreground mb-6 max-w-3xl">
-            Beyond basic prompting — I understand and work with Claude's full ecosystem including the API, agentic frameworks, tool use, and project-level configuration.
+          <p className="text-sm text-[#878787] mb-7 ml-5">
+            Deep familiarity beyond basic prompting — API integration, agent orchestration, tool use, and project-level configuration.
           </p>
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {claudeFeatures.map((f, i) => (
               <motion.div
                 key={f.label}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -16 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.6 + i * 0.08 }}
-                className="flex gap-3 p-4 rounded-xl bg-background/50 border border-border hover:border-orange-500/30 transition-colors"
+                transition={{ duration: 0.45, delay: 0.55 + i * 0.07 }}
+                className="luxury-card p-4 hover:border-[#C9A84C] transition-colors duration-300"
               >
-                <div className="mt-0.5 w-2 h-2 rounded-full bg-orange-400 shrink-0" />
-                <div>
-                  <p className="text-sm font-semibold text-foreground">{f.label}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">{f.desc}</p>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] shrink-0" />
+                  <p className="mono-text text-xs font-semibold text-[#F0EDE8] uppercase tracking-wider">{f.label}</p>
                 </div>
+                <p className="text-xs text-[#878787] ml-3.5 leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
           </div>

@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ui/theme-provider'
 import { LiveGridBackground } from '@/components/ui/live-grid-background'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair', weight: ['400','600','700','900'] })
+const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', weight: ['400','500','700'] })
 
 export const metadata: Metadata = {
   title: {
@@ -483,11 +485,11 @@ export default function RootLayout({
         <meta name="rating" content="general" />
         <link rel="canonical" href="https://vraj-prajapati.dev" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} font-sans`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
+          forcedTheme="dark"
           disableTransitionOnChange
         >
           <LiveGridBackground />

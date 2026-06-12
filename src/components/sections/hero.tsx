@@ -1,225 +1,166 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react'
+import { Github, Linkedin, Mail, ArrowDown } from 'lucide-react'
 import { TypeAnimation } from 'react-type-animation'
 import { portfolioData } from '@/data/portfolio'
 
+const stats = [
+  { value: '2+',  label: 'Years Experience' },
+  { value: '3',   label: 'Production Apps' },
+  { value: '40+', label: 'API Endpoints' },
+  { value: '35%', label: 'DB Performance Gain' },
+]
+
 export function Hero() {
-  const scrollToAbout = () => {
-    const element = document.querySelector('#about')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Infinite SVG Wave Background */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden w-full h-full">
-        {/* Bottom seamless wave */}
-        <div className="absolute bottom-0 left-0 w-full h-[120px] md:h-[180px] overflow-hidden">
-          <svg className="absolute left-0 top-0 h-full w-[200%] animate-svg-wave" viewBox="0 0 2400 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path fill="#2563eb" fillOpacity="0.18" d="M0 60 Q 150 120 300 60 T 600 60 T 900 60 T 1200 60 T 1500 60 T 1800 60 T 2100 60 T 2400 60 V120 H0Z" />
-          </svg>
-        </div>
-        {/* Classic Solar Ring with Orbits (centered) */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-          <div className="relative aspect-square w-[90vw] max-w-[400px] md:w-[60vw] md:max-w-[700px] lg:w-[700px] lg:max-w-[900px]">
-            {/* Main ring */}
-            {/* <div className="absolute inset-0 rounded-full border-2 border-blue-400/30 animate-rotate-slow" style={{ boxShadow: '0 0 80px 10px rgba(59,130,246,0.08)' }} /> */}
-            {/* Inner ring (proportional inset for all sizes) */}
-            {/* <div className="absolute inset-[12%] rounded-full border border-purple-400/20 animate-rotate-reverse" /> */}
-            {/* Orbiting planet 1 */}
-            <div className="absolute left-1/2 top-0 -translate-x-1/2 w-6 h-6 bg-gradient-to-tr from-blue-500 to-purple-400 rounded-full shadow-lg animate-orbit" style={{ animationDuration: '7s' }} />
-            {/* Orbiting planet 2 */}
-            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-4 h-4 bg-gradient-to-tr from-pink-400 to-yellow-300 rounded-full shadow-md animate-orbit2" style={{ animationDuration: '11s' }} />
-            {/* Orbiting planet 3 */}
-            <div className="absolute left-1/2 top-0 -translate-x-1/2 w-5 h-5 bg-gradient-to-tr from-green-400 to-blue-300 rounded-full shadow-md animate-orbit3" style={{ animationDuration: '9s' }} />
-          </div>
-        </div>
-      </div>
-      {/* Background is now handled globally by LiveGridBackground component */}
+    <section id="home" className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-16">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative pt-28">
-        {/* Profile Picture */}
-        {/* Removed profile image and aura as per user request */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
+      {/* Top gold radial glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 70%)' }}
+      />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+
+        {/* Label */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-8"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="section-label mb-6"
         >
-          {/* Greeting */}
-          {/* <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-muted-foreground"
-          >
-            Hello, I&apos;m
-          </motion.div> */}
+          Available for opportunities
+        </motion.p>
 
-          {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-4xl md:text-6xl font-bold gradient-text leading-tight"
-          >
-            {portfolioData.personal.name}
-          </motion.h1>
+        {/* Name */}
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="luxury-heading text-5xl md:text-7xl lg:text-8xl font-bold gradient-text leading-tight tracking-tight mb-4 pb-3"
+        >
+          {portfolioData.personal.name}
+        </motion.h1>
 
-          {/* Title with Typing Effect */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-xl md:text-2xl text-foreground/80 font-medium min-h-[2rem] flex items-center justify-center"
-          >
-            <TypeAnimation
-              sequence={[
-                'Software Engineer',
-                2000,
-                'Full Stack Developer',
-                2000,
-                'NestJS Developer',
-                2000,
-                'Node.js Developer',
-                2000,
-                'AWS & Cloud Engineer',
-                2000,
-                'TypeScript Expert',
-                2000,
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-              className="gradient-text"
-            />
-          </motion.h2>
+        {/* Gold divider */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="w-24 h-px mx-auto mb-6"
+          style={{ background: 'linear-gradient(90deg, transparent, #C9A84C, transparent)' }}
+        />
 
-          {/* Description with Typing Effect */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed min-h-[3rem] flex items-center justify-center"
-          >
-            <TypeAnimation
-              sequence={[
-                portfolioData.personal.about,
-                3000,
-              ]}
-              wrapper="p"
-              speed={60}
-              cursor={true}
-              repeat={0}
-            />
-          </motion.div>
+        {/* Typing title */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mono-text text-base md:text-lg tracking-widest uppercase mb-6 min-h-[1.8rem] flex items-center justify-center"
+          style={{ color: '#00D4FF' }}
+        >
+          <TypeAnimation
+            sequence={[
+              'Full-Stack Engineer',    2000,
+              'Node.js Developer',      2000,
+              'NestJS Specialist',      2000,
+              'AWS Cloud Engineer',     2000,
+              'TypeScript Expert',      2000,
+            ]}
+            wrapper="span"
+            speed={55}
+            repeat={Infinity}
+          />
+        </motion.div>
 
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
-            className="flex justify-center space-x-6"
-          >
-            <motion.a
-              href={portfolioData.personal.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-3 rounded-full bg-muted hover:bg-muted/80 transition-colors"
-            >
-              <Github size={24} />
-            </motion.a>
-            <motion.a
-              href={portfolioData.personal.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-3 rounded-full bg-muted hover:bg-muted/80 transition-colors"
-            >
-              <Linkedin size={24} />
-            </motion.a>
-            <motion.a
-              href={`mailto:${portfolioData.personal.email}`}
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-3 rounded-full bg-muted hover:bg-muted/80 transition-colors"
-            >
-              <Mail size={24} />
-            </motion.a>
-          </motion.div>
+        {/* Tagline */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-[#878787] text-sm md:text-base max-w-2xl mx-auto leading-relaxed mb-10"
+        >
+          Building production-grade platforms with Node.js, NestJS, React & AWS.
+          From API architecture to cloud deployment — end to end.
+        </motion.p>
 
-          {/* Resume Button Group - Centered with Floating Effect */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1, duration: 0.8 }}
-            className="flex justify-center items-center mb-16 animate-float"
-          >
+        {/* CTA buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1 }}
+          className="flex flex-wrap items-center justify-center gap-4 mb-14"
+        >
+          <a href="#projects" className="btn-gold-fill">View Work</a>
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-gold">
+            See Resume
+          </a>
+          <a href="/resume.pdf" download className="btn-gold">
+            Download CV
+          </a>
+        </motion.div>
+
+        {/* Social icons */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.1 }}
+          className="flex items-center justify-center gap-5 mb-16"
+        >
+          {[
+            { href: portfolioData.personal.github, icon: Github, label: 'GitHub' },
+            { href: portfolioData.personal.linkedin, icon: Linkedin, label: 'LinkedIn' },
+            { href: `mailto:${portfolioData.personal.email}`, icon: Mail, label: 'Email' },
+          ].map(({ href, icon: Icon, label }) => (
             <a
-              href="/resume.pdf"
-              target="_blank"
+              key={label}
+              href={href}
+              target={label !== 'Email' ? '_blank' : undefined}
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-7 py-3 rounded-full bg-blue-600 text-white font-bold shadow-md hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-all text-base mr-2"
-              style={{ minWidth: 140, justifyContent: 'center' }}
+              aria-label={label}
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-[#242424] text-[#878787] hover:text-[#C9A84C] hover:border-[#C9A84C] transition-all duration-200"
             >
-              See Resume
+              <Icon size={17} />
             </a>
-            <a
-              href="/resume.pdf"
-              download
-              className="flex items-center justify-center px-6 py-3 rounded-full border-2 border-blue-400 text-blue-700 font-bold bg-transparent hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-all text-base"
-              style={{ minWidth: 160 }}
-            >
-              Download Resume
-            </a>
-          </motion.div>
+          ))}
+        </motion.div>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <motion.button
-              onClick={scrollToAbout}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 border border-border rounded-lg font-medium hover:bg-muted transition-colors flex items-center gap-2"
+        {/* Stats row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto"
+        >
+          {stats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.3 + i * 0.08 }}
+              className="text-center"
             >
-              Learn More
-              <ArrowDown size={20} />
-            </motion.button>
-          </motion.div>
+              <p className="luxury-heading text-3xl md:text-4xl font-bold gradient-text">{s.value}</p>
+              <p className="mono-text text-xs text-[#878787] uppercase tracking-widest mt-1">{s.label}</p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      {/* <motion.div
+      {/* Scroll indicator */}
+      <motion.a
+        href="#about"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#4A4A4A] hover:text-[#C9A84C] transition-colors"
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-3 bg-muted-foreground/50 rounded-full mt-2"
-          />
+        <span className="mono-text text-xs tracking-widest uppercase">Scroll</span>
+        <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+          <ArrowDown size={14} />
         </motion.div>
-      </motion.div> */}
+      </motion.a>
     </section>
   )
-} 
+}

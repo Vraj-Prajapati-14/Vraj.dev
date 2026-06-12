@@ -6,106 +6,92 @@ import { Code, Database, Server, Cloud, Palette, Wrench, Zap, Bot } from 'lucide
 import { portfolioData } from '@/data/portfolio'
 
 const skillCategories = [
-  { name: 'Languages', icon: Code, skills: portfolioData.skills.languages },
-  { name: 'Frontend', icon: Palette, skills: portfolioData.skills.frontend },
-  { name: 'Backend', icon: Server, skills: portfolioData.skills.backend },
-  { name: 'Database', icon: Database, skills: portfolioData.skills.database },
-  { name: 'DevOps', icon: Cloud, skills: portfolioData.skills.devops },
-  { name: 'Tools', icon: Wrench, skills: portfolioData.skills.tools },
-  { name: 'Integrations', icon: Zap, skills: portfolioData.skills.integrations },
-  { name: 'AI Tools', icon: Bot, skills: portfolioData.skills.aiTools },
+  { name: 'Languages',    icon: Code,     skills: portfolioData.skills.languages },
+  { name: 'Frontend',     icon: Palette,  skills: portfolioData.skills.frontend },
+  { name: 'Backend',      icon: Server,   skills: portfolioData.skills.backend },
+  { name: 'Database',     icon: Database, skills: portfolioData.skills.database },
+  { name: 'DevOps',       icon: Cloud,    skills: portfolioData.skills.devops },
+  { name: 'Security',     icon: Wrench,   skills: portfolioData.skills.security },
+  { name: 'Integrations', icon: Zap,      skills: portfolioData.skills.integrations },
+  { name: 'AI Tools',     icon: Bot,      skills: portfolioData.skills.aiTools },
+]
+
+const extraSkills = [
+  'RESTful APIs', 'GraphQL', 'JWT Authentication', 'OAuth', 'CI/CD',
+  'Agile/Scrum', 'Git Workflow', 'API Testing', 'Performance Optimization',
+  'Responsive Design', 'Microservices', 'Docker Compose',
+  'Claude AI', 'Claude Code CLI', 'MCP', 'AI Agents', 'Cursor IDE', 'OpenAI Codex',
 ]
 
 export function Skills() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.08 })
 
   return (
-    <section id="skills" className="py-20 relative section-bg">
+    <section id="skills" className="py-24 relative" style={{ background: '#0D0D0D' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Heading */}
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.7 }}
+          className="mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
+          <p className="section-label mb-2">02 — Expertise</p>
+          <h2 className="luxury-heading text-4xl md:text-5xl font-bold text-[#F0EDE8]">
             Skills & Technologies
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            I&apos;ve worked with a variety of technologies to create robust and scalable applications.
-          </p>
+          <div className="gold-rule-left mt-4" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
+        {/* Skill cards grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+          {skillCategories.map((cat, i) => (
             <motion.div
-              key={category.name}
-              initial={{ opacity: 0, y: 50 }}
+              key={cat.name}
+              initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="glass p-6 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 hover:bg-white/15 dark:hover:bg-black/15 group"
+              transition={{ duration: 0.55, delay: i * 0.07 }}
+              className="luxury-card-gold p-5 group"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <category.icon className="text-primary" size={24} />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">
-                  {category.name}
+              <div className="flex items-center gap-2.5 mb-5">
+                <cat.icon size={16} style={{ color: '#C9A84C' }} />
+                <h3 className="mono-text text-xs uppercase tracking-widest text-[#C9A84C]">
+                  {cat.name}
                 </h3>
               </div>
-              
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
+
+              <ul className="space-y-2.5">
+                {cat.skills.map((skill) => (
+                  <li
                     key={skill}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={inView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.4, delay: (index * 0.1) + (skillIndex * 0.05) }}
-                    className="flex items-center justify-between"
+                    className="flex items-center gap-2 text-sm text-[#878787] group-hover:text-[#AAAAAA] transition-colors"
                   >
-                    <span className="text-foreground font-medium">{skill}</span>
-                    <div className="flex items-center gap-2">
-                      <div className="w-20 h-2 bg-muted rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={inView ? { width: `${Math.random() * 40 + 60}%` } : {}}
-                          transition={{ duration: 1, delay: (index * 0.1) + (skillIndex * 0.05) }}
-                          className="h-full bg-gradient-to-r from-primary to-primary/60 rounded-full"
-                        />
-                      </div>
-                    </div>
-                  </motion.div>
+                    <span className="w-1 h-1 rounded-full bg-[#C9A84C] shrink-0" />
+                    <span className="mono-text text-xs">{skill}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </motion.div>
           ))}
         </div>
 
-        {/* Additional Skills */}
+        {/* Extra skills chips */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16 text-center"
+          transition={{ duration: 0.7, delay: 0.6 }}
         >
-          <h3 className="text-2xl font-bold mb-8">Additional Skills</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              'RESTful APIs', 'GraphQL', 'JWT Authentication', 'OAuth', 'CI/CD',
-              'Agile/Scrum', 'Git Workflow', 'API Testing', 'Performance Optimization',
-              'Responsive Design', 'Progressive Web Apps', 'Microservices', 'Docker Compose',
-              'Claude AI', 'Claude Code CLI', 'MCP (Model Context Protocol)', 'AI Agents', 'Cursor IDE', 'OpenAI Codex'
-            ].map((skill, index) => (
+          <p className="section-label mb-5">Also familiar with</p>
+          <div className="flex flex-wrap gap-2">
+            {extraSkills.map((skill, i) => (
               <motion.span
                 key={skill}
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.85 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.8 + (index * 0.05) }}
-                className="px-4 py-2 bg-muted text-foreground rounded-full text-sm font-medium hover:bg-muted/80 transition-colors"
+                transition={{ duration: 0.3, delay: 0.7 + i * 0.03 }}
+                className="mono-tag hover:border-[#C9A84C] hover:bg-[rgba(201,168,76,0.18)] transition-all cursor-default"
               >
                 {skill}
               </motion.span>
@@ -115,4 +101,4 @@ export function Skills() {
       </div>
     </section>
   )
-} 
+}
