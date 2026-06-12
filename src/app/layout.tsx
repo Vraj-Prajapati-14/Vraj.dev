@@ -3,6 +3,9 @@ import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ui/theme-provider'
 import { LiveGridBackground } from '@/components/ui/live-grid-background'
+import { ScrollProgress } from '@/components/ui/scroll-progress'
+import { CustomCursor } from '@/components/ui/custom-cursor'
+import { IntroAnimation } from '@/components/ui/intro-animation'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair', weight: ['400','600','700','900'] })
@@ -492,6 +495,9 @@ export default function RootLayout({
           forcedTheme="dark"
           disableTransitionOnChange
         >
+          <IntroAnimation />
+          <CustomCursor />
+          <ScrollProgress />
           <LiveGridBackground />
           {children}
         </ThemeProvider>

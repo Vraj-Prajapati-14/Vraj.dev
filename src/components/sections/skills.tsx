@@ -5,6 +5,25 @@ import { useInView } from 'react-intersection-observer'
 import { Code, Database, Server, Cloud, Palette, Wrench, Zap, Bot } from 'lucide-react'
 import { portfolioData } from '@/data/portfolio'
 
+const techIcons = [
+  { name: 'JavaScript', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+  { name: 'TypeScript', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+  { name: 'Node.js',    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+  { name: 'React',      url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+  { name: 'NestJS',     url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg' },
+  { name: 'PostgreSQL', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+  { name: 'MongoDB',    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+  { name: 'MySQL',      url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+  { name: 'Docker',     url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+  { name: 'Python',     url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+  { name: 'Git',        url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+  { name: 'GraphQL',    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg' },
+  { name: 'AWS',        url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg' },
+  { name: 'Redis',      url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
+  { name: 'Express',    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+  { name: 'Redux',      url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg' },
+]
+
 const skillCategories = [
   { name: 'Languages',    icon: Code,     skills: portfolioData.skills.languages },
   { name: 'Frontend',     icon: Palette,  skills: portfolioData.skills.frontend },
@@ -43,6 +62,44 @@ export function Skills() {
             Skills & Technologies
           </h2>
           <div className="gold-rule-left mt-4" />
+        </motion.div>
+
+        {/* ── Tech Icon Grid ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="mb-16"
+        >
+          <p className="section-label mb-6">Core stack at a glance</p>
+          <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-16 gap-4">
+            {techIcons.map((tech, i) => (
+              <motion.div
+                key={tech.name}
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.15 + i * 0.04 }}
+                className="flex flex-col items-center gap-2 group"
+              >
+                <div
+                  className="w-12 h-12 flex items-center justify-center rounded-lg border border-[#242424] p-2.5 group-hover:border-[#C9A84C] transition-all duration-200"
+                  style={{ background: '#111111' }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={tech.url}
+                    alt={tech.name}
+                    className="w-full h-full object-contain"
+                    style={tech.name === 'Express' || tech.name === 'AWS' ? { filter: 'invert(0.6)' } : {}}
+                    loading="lazy"
+                  />
+                </div>
+                <span className="mono-text text-[10px] text-[#4A4A4A] group-hover:text-[#C9A84C] transition-colors text-center leading-tight">
+                  {tech.name}
+                </span>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Skill cards grid */}

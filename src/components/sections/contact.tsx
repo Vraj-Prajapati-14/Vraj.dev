@@ -2,10 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Mail, Phone, MapPin, Github, Linkedin, Send } from 'lucide-react'
+import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle2, XCircle, X } from 'lucide-react'
 import { portfolioData } from '@/data/portfolio'
 import emailjs from 'emailjs-com'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const contactInfo = [
   { icon: Mail,   label: 'Email',    value: portfolioData.personal.email,    href: `mailto:${portfolioData.personal.email}` },
@@ -16,22 +16,32 @@ const contactInfo = [
 const inputClass =
   'w-full px-4 py-3 bg-[#0F0F0F] border border-[#242424] rounded text-[#F0EDE8] text-sm placeholder-[#4A4A4A] focus:outline-none focus:border-[#C9A84C] transition-colors duration-200 mono-text'
 
+type Toast = { type: 'success' | 'error'; message: string } | null
+
 export function Contact() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState<string | null>(null)
-  const [error, setError]     = useState<string | null>(null)
+  const [toast, setToast]     = useState<Toast>(null)
+  const timerRef              = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const showToast = (type: 'success' | 'error', message: string) => {
+    if (timerRef.current) clearTimeout(timerRef.current)
+    setToast({ type, message })
+    timerRef.current = setTimeout(() => setToast(null), 5000)
+  }
+
+  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current) }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setLoading(true); setSuccess(null); setError(null)
+    setLoading(true)
     const form = e.currentTarget
     try {
       await emailjs.sendForm('service_t1bzn0t', 'template_aqielag', form, 'bn8wfDRg8QZNfk3ve')
-      setSuccess('Message sent successfully!')
+      showToast('success', 'Message sent! I\'ll get back to you within 24 hours.')
       form.reset()
     } catch {
-      setError('Failed to send. Please try again or email me directly.')
+      showToast('error', 'Failed to send. Please email me directly.')
     } finally {
       setLoading(false)
     }
@@ -39,6 +49,41 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-24 relative">
+
+      {/* ── Toast notification ── */}
+      <div className="fixed bottom-6 right-6 z-[9000] pointer-events-none">
+        <motion.div
+          key={toast ? toast.type + toast.message : 'empty'}
+          initial={{ opacity: 0, y: 24, scale: 0.95 }}
+          animate={toast ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 24, scale: 0.95 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+          className="pointer-events-auto"
+        >
+          {toast && (
+            <div
+              className="flex items-start gap-3 px-4 py-3 rounded-lg min-w-[280px] max-w-xs"
+              style={{
+                background: '#111111',
+                border: `1px solid ${toast.type === 'success' ? 'rgba(201,168,76,0.4)' : 'rgba(239,68,68,0.4)'}`,
+                borderLeft: `3px solid ${toast.type === 'success' ? '#C9A84C' : '#EF4444'}`,
+                boxShadow: `0 8px 32px rgba(0,0,0,0.5), 0 0 20px ${toast.type === 'success' ? 'rgba(201,168,76,0.08)' : 'rgba(239,68,68,0.08)'}`,
+              }}
+            >
+              {toast.type === 'success'
+                ? <CheckCircle2 size={16} className="shrink-0 mt-0.5" style={{ color: '#C9A84C' }} />
+                : <XCircle     size={16} className="shrink-0 mt-0.5" style={{ color: '#EF4444' }} />
+              }
+              <p className="mono-text text-xs text-[#F0EDE8] leading-relaxed flex-1">{toast.message}</p>
+              <button
+                onClick={() => setToast(null)}
+                className="shrink-0 ml-1 text-[#4A4A4A] hover:text-[#878787] transition-colors"
+              >
+                <X size={13} />
+              </button>
+            </div>
+          )}
+        </motion.div>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Heading */}
@@ -112,14 +157,19 @@ export function Contact() {
           >
             <div className="luxury-card p-8" style={{ borderTop: '2px solid #C9A84C' }}>
               <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Hidden fields that match EmailJS template variables */}
+                <input type="hidden" name="to_name" value="Vraj" />
+
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label className="mono-text text-xs text-[#878787] uppercase tracking-widest block mb-2">Name</label>
-                    <input type="text" name="name" required className={inputClass} placeholder="Your name" />
+                    {/* name="from_name" matches {{from_name}} in template */}
+                    <input type="text" name="from_name" required className={inputClass} placeholder="Your name" />
                   </div>
                   <div>
                     <label className="mono-text text-xs text-[#878787] uppercase tracking-widest block mb-2">Email</label>
-                    <input type="email" name="email" required className={inputClass} placeholder="your@email.com" />
+                    {/* name="reply_to" matches {{reply_to}} — also sets reply-to header */}
+                    <input type="email" name="reply_to" required className={inputClass} placeholder="your@email.com" />
                   </div>
                 </div>
 
@@ -132,9 +182,6 @@ export function Contact() {
                   <label className="mono-text text-xs text-[#878787] uppercase tracking-widest block mb-2">Message</label>
                   <textarea name="message" rows={5} required className={inputClass + ' resize-none'} placeholder="Tell me about your project..." />
                 </div>
-
-                {success && <p className="mono-text text-xs text-[#10B981] text-center">{success}</p>}
-                {error   && <p className="mono-text text-xs text-red-400 text-center">{error}</p>}
 
                 <button type="submit" disabled={loading} className="btn-gold-fill w-full justify-center">
                   <Send size={14} />
