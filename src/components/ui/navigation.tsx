@@ -1,107 +1,74 @@
 "use client"
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
-
-const navItems = [
-  { name: 'About',    href: '#about' },
-  { name: 'Skills',   href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'AI Tools', href: '#ai-tools' },
-  { name: 'Contact',  href: '#contact' },
-]
+import { Github, Linkedin, Code2 } from 'lucide-react'
+import { portfolioData } from '@/data/portfolio'
 
 export function Navigation() {
-  const [isOpen, setIsOpen]   = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? 'bg-[#0A0A0A]/95 backdrop-blur-md border-b border-[#242424]' : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <>
+      {/* ── Floating centered pill — all screen sizes ── */}
+      <nav className="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-max max-w-[calc(100vw-16px)]">
+        <div
+          className="flex items-center gap-0.5 sm:gap-1 px-2 sm:px-3 py-1.5 sm:py-2 rounded-full border border-[#2A2A2A] bg-[#0A0A0A]/90 backdrop-blur-md"
+          style={{ boxShadow: '0 0 0 1px rgba(201,168,76,0.06), 0 8px 32px rgba(0,0,0,0.6)' }}
+        >
           {/* Logo */}
-          <a
-            href="#home"
-            className="luxury-heading text-xl font-bold gradient-text tracking-wide"
-          >
+          <a href="#home" className="luxury-heading text-sm font-bold gradient-text tracking-wide px-2 py-1">
             VP.
           </a>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="mono-text text-xs uppercase tracking-widest text-[#878787] hover:text-[#C9A84C] transition-colors duration-200"
-              >
-                {item.name}
-              </a>
-            ))}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gold text-xs"
-            >
-              Resume
-            </a>
-          </div>
+          <div className="w-px h-4 bg-[#2A2A2A] mx-1" />
 
-          {/* Mobile hamburger */}
+          {/* Icon links */}
+          <a
+            href={portfolioData.personal.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="w-8 h-8 flex items-center justify-center text-[#878787] hover:text-[#C9A84C] transition-colors rounded-full hover:bg-[#181818]"
+          >
+            <Github size={14} />
+          </a>
+          <a
+            href={portfolioData.personal.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="w-8 h-8 flex items-center justify-center text-[#878787] hover:text-[#C9A84C] transition-colors rounded-full hover:bg-[#181818]"
+          >
+            <Linkedin size={14} />
+          </a>
           <button
-            className="md:hidden p-2 text-[#878787] hover:text-[#C9A84C] transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
+            onClick={() => window.dispatchEvent(new CustomEvent('vraj:terminal'))}
+            aria-label="Open terminal"
+            title="Open terminal (try 'help')"
+            className="w-8 h-8 flex items-center justify-center text-[#878787] hover:text-[#C9A84C] transition-colors rounded-full hover:bg-[#181818]"
           >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
+            <Code2 size={14} />
           </button>
-        </div>
-      </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#0D0D0D] border-b border-[#242424]"
+          <div className="w-px h-4 bg-[#2A2A2A] mx-1" />
+
+          {/* Resume text link */}
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mono-text text-[11px] uppercase tracking-widest text-[#878787] hover:text-[#C9A84C] transition-colors px-2 py-1"
           >
-            <div className="px-6 py-4 flex flex-col gap-4">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="mono-text text-xs uppercase tracking-widest text-[#878787] hover:text-[#C9A84C] transition-colors py-1"
-                >
-                  {item.name}
-                </a>
-              ))}
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold text-xs w-fit"
-              >
-                Resume
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+            Resume
+          </a>
+
+          {/* Contact pill */}
+          <a
+            href="#contact"
+            className="px-4 py-1.5 rounded-full bg-[#F0EDE8] text-[#0A0A0A] text-[11px] font-bold mono-text hover:bg-[#C9A84C] transition-colors ml-1"
+          >
+            Contact
+          </a>
+        </div>
+      </nav>
+
+    </>
   )
 }

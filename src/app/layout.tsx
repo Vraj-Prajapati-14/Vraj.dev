@@ -1,15 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
+import { Inter, Playfair_Display, JetBrains_Mono, Caveat } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ui/theme-provider'
 import { LiveGridBackground } from '@/components/ui/live-grid-background'
 import { ScrollProgress } from '@/components/ui/scroll-progress'
 import { CustomCursor } from '@/components/ui/custom-cursor'
 import { IntroAnimation } from '@/components/ui/intro-animation'
+import { Terminal }      from '@/components/ui/terminal'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair', weight: ['400','600','700','900'] })
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', weight: ['400','500','700'] })
+const caveat = Caveat({ subsets: ['latin'], variable: '--font-caveat', weight: ['400','700'] })
 
 export const metadata: Metadata = {
   title: {
@@ -488,7 +490,7 @@ export default function RootLayout({
         <meta name="rating" content="general" />
         <link rel="canonical" href="https://vraj-prajapati.dev" />
       </head>
-      <body className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} font-sans`}>
+      <body className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} ${caveat.variable} font-sans`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -496,6 +498,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <IntroAnimation />
+          <Terminal />
           <CustomCursor />
           <ScrollProgress />
           <LiveGridBackground />
