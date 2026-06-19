@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { Github, Linkedin, Mail, X as XIcon } from 'lucide-react'
 import { portfolioData } from '@/data/portfolio'
 
 export function Hero() {
@@ -97,6 +97,7 @@ export function Hero() {
               {[
                 { href: portfolioData.personal.github,              icon: Github,   label: 'GitHub' },
                 { href: portfolioData.personal.linkedin,            icon: Linkedin, label: 'LinkedIn' },
+                { href: portfolioData.personal.twitter,             icon: XIcon,    label: 'Twitter' },
                 { href: `mailto:${portfolioData.personal.email}`,   icon: Mail,     label: 'Email' },
               ].map(({ href, icon: Icon, label }) => (
                 <a

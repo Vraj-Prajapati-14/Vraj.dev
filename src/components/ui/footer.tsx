@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail, Phone, MapPin, ArrowUp } from 'lucide-react'
+import { Github, Linkedin, Mail, Phone, MapPin, ArrowUp, X as XIcon } from 'lucide-react'
 import { portfolioData } from '@/data/portfolio'
 
 const navLinks = [
@@ -37,9 +37,10 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                { href: portfolioData.personal.github, icon: Github, label: 'GitHub' },
-                { href: portfolioData.personal.linkedin, icon: Linkedin, label: 'LinkedIn' },
-                { href: `mailto:${portfolioData.personal.email}`, icon: Mail, label: 'Email' },
+                { href: portfolioData.personal.github,              icon: Github,   label: 'GitHub' },
+                { href: portfolioData.personal.linkedin,            icon: Linkedin, label: 'LinkedIn' },
+                { href: portfolioData.personal.twitter,             icon: XIcon,    label: 'Twitter' },
+                { href: `mailto:${portfolioData.personal.email}`,   icon: Mail,     label: 'Email' },
               ].map(({ href, icon: Icon, label }) => (
                 <a
                   key={label}

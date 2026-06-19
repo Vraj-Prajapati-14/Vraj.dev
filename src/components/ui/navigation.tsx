@@ -1,6 +1,6 @@
 "use client"
 
-import { Github, Linkedin, Code2 } from 'lucide-react'
+import { Github, Linkedin, Code2, X as XIcon } from 'lucide-react'
 import { portfolioData } from '@/data/portfolio'
 
 export function Navigation() {
@@ -37,6 +37,15 @@ export function Navigation() {
             className="w-8 h-8 flex items-center justify-center text-[#878787] hover:text-[#C9A84C] transition-colors rounded-full hover:bg-[#181818]"
           >
             <Linkedin size={14} />
+          </a>
+          <a
+            href={portfolioData.personal.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter / X"
+            className="w-8 h-8 flex items-center justify-center text-[#878787] hover:text-[#C9A84C] transition-colors rounded-full hover:bg-[#181818]"
+          >
+            <XIcon size={14} />
           </a>
           <button
             onClick={() => window.dispatchEvent(new CustomEvent('vraj:terminal'))}
