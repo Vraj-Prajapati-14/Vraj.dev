@@ -2,147 +2,221 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Brain, Target, TrendingUp, Code, BarChart3, Zap } from 'lucide-react'
+import { FileText, Download } from 'lucide-react'
 import { portfolioData } from '@/data/portfolio'
 
-const features = [
-  { icon: Brain,    title: 'Deep Learning Models',      desc: 'BI-LSTM, CNN, GRU, and Transformer-based models.' },
-  { icon: Target,   title: '93% Accuracy',              desc: 'BI-LSTM surpassed previous results by 9%.' },
-  { icon: TrendingUp, title: 'Performance Optimization', desc: 'Hyperparameter tuning and advanced preprocessing.' },
-  { icon: Code,     title: 'Modern Frameworks',         desc: 'TensorFlow, Keras, and Hugging Face Transformers.' },
-  { icon: BarChart3, title: 'Algorithmic Comparison',   desc: 'Detailed statistical analysis across 5 models.' },
-  { icon: Zap,      title: 'Real-world Application',    desc: 'Pharmaceutical sentiment analysis at scale.' },
-]
-
 const models = [
-  { name: 'BI-LSTM',            acc: 93, color: '#C9A84C' },
-  { name: 'CNN',                acc: 89, color: '#00D4FF' },
-  { name: 'GRU',                acc: 87, color: '#7C3AED' },
-  { name: 'Logistic Regression', acc: 82, color: '#10B981' },
+  { name: 'BI-LSTM',             acc: 93, color: '#C9A84C' },
+  { name: 'CNN',                 acc: 89, color: '#60A5FA' },
+  { name: 'GRU',                 acc: 87, color: '#A78BFA' },
+  { name: 'Logistic Regression', acc: 82, color: '#34D399' },
   { name: 'Random Forest',       acc: 79, color: '#F87171' },
 ]
 
+const bigStats = [
+  { value: '93%',  label: 'BI-LSTM\nAccuracy',  color: '#C9A84C' },
+  { value: '+9%',  label: 'Over Prior\nBaseline', color: '#60A5FA' },
+  { value: '5',    label: 'Models\nCompared',    color: '#A78BFA' },
+]
+
 export function Research() {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.08 })
   const research = portfolioData.research[0]
 
   return (
-    <section id="research" className="py-24 relative" style={{ background: '#0D0D0D' }}>
+    <section id="research" className="py-24 relative" style={{ background: '#0A0A0A' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Heading */}
+        {/* ── Heading ── */}
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="mb-16"
+          transition={{ duration: 0.65 }}
+          className="mb-14"
         >
-          <p className="section-label mb-2">Research</p>
-          <h2 className="luxury-heading text-4xl md:text-5xl font-bold text-[#F0EDE8]">
-            Research & Innovation
+          <span className="mono-text text-[10px] uppercase tracking-[0.22em] mb-3 block" style={{ color: '#C9A84C' }}>
+            Research
+          </span>
+          <h2 className="font-bold leading-tight" style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
+            <span className="text-[#F0EDE8] text-3xl sm:text-4xl md:text-5xl">Research &amp; </span>
+            <span className="text-3xl sm:text-4xl md:text-5xl italic" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', color: '#4A4030' }}>Innovation</span>
           </h2>
-          <div className="gold-rule-left mt-4" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-14 mb-16 items-start">
-          {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15 }}
-          >
-            <h3 className="luxury-heading text-2xl font-bold text-[#F0EDE8] mb-4">{research.title}</h3>
-            <p className="text-sm text-[#878787] leading-relaxed mb-6">{research.description}</p>
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
 
-            <div className="space-y-3 mb-8">
-              {research.highlights?.map((h, i) => (
-                <div key={i} className="flex items-start gap-2.5 text-sm text-[#878787]">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#C9A84C] shrink-0" />
-                  {h}
-                </div>
+          {/* ── LEFT ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.65, delay: 0.15 }}
+          >
+            {/* Title + description */}
+            <h3
+              className="text-lg font-semibold text-[#D0C9BE] mb-3 leading-snug"
+              style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}
+            >
+              {research.title}
+            </h3>
+            <p className="text-sm leading-relaxed mb-8" style={{ color: '#4A4540' }}>
+              {research.description}
+            </p>
+
+            {/* Big stat trio */}
+            <div className="grid grid-cols-3 gap-3 mb-8">
+              {bigStats.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.35 + i * 0.1 }}
+                  className="rounded-xl p-4 text-center"
+                  style={{ background: '#0E0E0E', border: `1px solid ${s.color}18` }}
+                >
+                  <p
+                    className="text-2xl sm:text-3xl font-black leading-none mb-1.5"
+                    style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif', color: s.color }}
+                  >
+                    {s.value}
+                  </p>
+                  <p
+                    className="text-[9px] uppercase tracking-widest leading-tight whitespace-pre-line"
+                    style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif', color: '#3A3530' }}
+                  >
+                    {s.label}
+                  </p>
+                </motion.div>
               ))}
             </div>
 
+            {/* Tech pills */}
             <div className="flex flex-wrap gap-1.5 mb-8">
               {research.tech?.map((t) => (
-                <span key={t} className="mono-tag">{t}</span>
+                <span
+                  key={t}
+                  className="text-[10px] px-2.5 py-1 rounded-md"
+                  style={{
+                    fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                    color: '#4A4540',
+                    background: '#111111',
+                    border: '1px solid #1A1A1A',
+                  }}
+                >
+                  {t}
+                </span>
               ))}
             </div>
 
-            {/* Stats */}
-            <div className="luxury-card p-6 grid grid-cols-2 gap-6 mb-8">
-              {[{ val: '93%', label: 'BI-LSTM Accuracy' }, { val: '+9%', label: 'Improvement' }].map((s) => (
-                <div key={s.label} className="text-center">
-                  <p className="luxury-heading text-4xl font-bold gradient-text">{s.val}</p>
-                  <p className="mono-text text-xs text-[#878787] uppercase tracking-widest mt-1">{s.label}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <a href="/research-paper.pdf" target="_blank" rel="noopener noreferrer" className="btn-gold-fill">
-                See Paper
+            {/* Buttons */}
+            <div className="flex gap-3">
+              <a
+                href="/research-paper.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] font-semibold transition-all"
+                style={{
+                  background: '#F0EDE8',
+                  color: '#0A0A0A',
+                  fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = '#C9A84C')}
+                onMouseLeave={e => (e.currentTarget.style.background = '#F0EDE8')}
+              >
+                <FileText size={12} /> View Paper
               </a>
-              <a href="/research-paper.pdf" download className="btn-gold">
-                Download Paper
+              <a
+                href="/research-paper.pdf"
+                download
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] font-semibold transition-all"
+                style={{
+                  background: 'transparent',
+                  color: '#6A6560',
+                  border: '1px solid #222222',
+                  fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = '#C9A84C'; e.currentTarget.style.color = '#C9A84C' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = '#222222'; e.currentTarget.style.color = '#6A6560' }}
+              >
+                <Download size={12} /> Download
               </a>
             </div>
           </motion.div>
 
-          {/* Right — model chart */}
+          {/* ── RIGHT: model chart ── */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="luxury-card p-8"
-            style={{ borderTop: '2px solid #C9A84C' }}
+            transition={{ duration: 0.65, delay: 0.3 }}
+            className="rounded-2xl p-7"
+            style={{ background: '#0E0E0E', border: '1px solid #161616', borderTop: '2px solid #C9A84C' }}
           >
-            <h4 className="mono-text text-xs uppercase tracking-widest text-[#C9A84C] mb-6">Model Performance</h4>
-            <div className="space-y-5">
+            <div className="flex items-center justify-between mb-8">
+              <span className="mono-text text-[10px] uppercase tracking-widest" style={{ color: '#C9A84C' }}>
+                Model Performance
+              </span>
+              <span className="mono-text text-[9px]" style={{ color: '#2A2A2A' }}>Drug Sentiment · NLP</span>
+            </div>
+
+            <div className="space-y-6">
               {models.map((m, i) => (
-                <motion.div key={m.name} className="space-y-1.5"
-                  initial={{ opacity: 0, x: -16 }}
+                <motion.div
+                  key={m.name}
+                  initial={{ opacity: 0, x: -12 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.6 + i * 0.08 }}
+                  transition={{ duration: 0.5, delay: 0.5 + i * 0.08 }}
                 >
-                  <div className="flex justify-between items-center">
-                    <span className="mono-text text-xs text-[#878787]">{m.name}</span>
-                    <span className="mono-text text-xs font-bold" style={{ color: m.color }}>{m.acc}%</span>
+                  <div className="flex justify-between items-center mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: m.color }} />
+                      <span
+                        className="text-xs"
+                        style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif', color: '#5A5550' }}
+                      >
+                        {m.name}
+                      </span>
+                      {i === 0 && (
+                        <span
+                          className="text-[8px] px-1.5 py-0.5 rounded uppercase tracking-widest"
+                          style={{ background: `${m.color}18`, color: m.color, fontFamily: 'var(--font-inter)' }}
+                        >
+                          Best
+                        </span>
+                      )}
+                    </div>
+                    <span
+                      className="text-sm font-bold tabular-nums"
+                      style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif', color: m.color }}
+                    >
+                      {m.acc}%
+                    </span>
                   </div>
-                  <div className="h-1.5 rounded-full bg-[#1A1A1A] overflow-hidden">
+                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: '#181818' }}>
                     <motion.div
                       initial={{ width: 0 }}
                       animate={inView ? { width: `${m.acc}%` } : {}}
-                      transition={{ duration: 1.2, delay: 0.8 + i * 0.1 }}
+                      transition={{ duration: 1.2, ease: 'easeOut', delay: 0.7 + i * 0.1 }}
                       className="h-full rounded-full"
-                      style={{ background: m.color }}
+                      style={{ background: `linear-gradient(90deg, ${m.color}88, ${m.color})` }}
                     />
                   </div>
                 </motion.div>
               ))}
             </div>
+
+            {/* Bottom note */}
+            <div
+              className="mt-8 pt-5 flex items-center gap-2"
+              style={{ borderTop: '1px solid #141414' }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#C9A84C' }} />
+              <p className="text-[10px] leading-relaxed" style={{ color: '#2E2A24', fontFamily: 'var(--font-inter)' }}>
+                BI-LSTM achieved <span style={{ color: '#C9A84C' }}>93% accuracy</span> — 9% above prior state-of-the-art on drug review sentiment.
+              </p>
+            </div>
           </motion.div>
         </div>
 
-        {/* Feature cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {features.map((f, i) => (
-            <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.7 + i * 0.08 }}
-              className="luxury-card p-5 group"
-            >
-              <div className="w-9 h-9 rounded border border-[#242424] flex items-center justify-center mb-4 group-hover:border-[#C9A84C] transition-colors">
-                <f.icon size={16} style={{ color: '#C9A84C' }} />
-              </div>
-              <h4 className="mono-text text-xs uppercase tracking-widest text-[#F0EDE8] mb-2">{f.title}</h4>
-              <p className="text-xs text-[#878787] leading-relaxed">{f.desc}</p>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   )

@@ -239,13 +239,6 @@ export const metadata: Metadata = {
   category: 'technology',
   classification: 'Portfolio Website',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-touch-icon.png',
-  },
   manifest: '/manifest.json',
 }
 

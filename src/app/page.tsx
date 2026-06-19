@@ -7,7 +7,6 @@ import { Research }     from '@/components/sections/research'
 import { Projects }     from '@/components/sections/projects'
 import { GithubStats }  from '@/components/sections/github-stats'
 import { AiTools }      from '@/components/sections/ai-tools'
-import { Reading }      from '@/components/sections/reading'
 import { Contact }      from '@/components/sections/contact'
 import { Footer }       from '@/components/ui/footer'
 
@@ -24,7 +23,6 @@ export default function Home() {
         <Projects />
         <GithubStats />
         <AiTools />
-        <Reading />
         <Contact />
       </main>
       <Footer />

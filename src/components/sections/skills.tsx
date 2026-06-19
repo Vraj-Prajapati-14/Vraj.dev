@@ -33,18 +33,17 @@ const col4 = [
   { name: 'NestJS',     url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg' },
   { name: 'React',      url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
 ]
-
 const iconColumns = [col1, col2, col3, col4]
 
 const skillCategories = [
-  { name: 'Languages',    icon: Code,     skills: portfolioData.skills.languages },
-  { name: 'Frontend',     icon: Palette,  skills: portfolioData.skills.frontend },
-  { name: 'Backend',      icon: Server,   skills: portfolioData.skills.backend },
-  { name: 'Database',     icon: Database, skills: portfolioData.skills.database },
-  { name: 'DevOps',       icon: Cloud,    skills: portfolioData.skills.devops },
-  { name: 'Security',     icon: Wrench,   skills: portfolioData.skills.security },
-  { name: 'Integrations', icon: Zap,      skills: portfolioData.skills.integrations },
-  { name: 'AI Tools',     icon: Bot,      skills: portfolioData.skills.aiTools },
+  { name: 'Languages',    Icon: Code,     color: '#60A5FA', bg: 'rgba(96,165,250,0.08)',  skills: portfolioData.skills.languages },
+  { name: 'Frontend',     Icon: Palette,  color: '#F472B6', bg: 'rgba(244,114,182,0.08)', skills: portfolioData.skills.frontend },
+  { name: 'Backend',      Icon: Server,   color: '#34D399', bg: 'rgba(52,211,153,0.08)',  skills: portfolioData.skills.backend },
+  { name: 'Database',     Icon: Database, color: '#FBBF24', bg: 'rgba(251,191,36,0.08)',  skills: portfolioData.skills.database },
+  { name: 'DevOps',       Icon: Cloud,    color: '#38BDF8', bg: 'rgba(56,189,248,0.08)',  skills: portfolioData.skills.devops },
+  { name: 'Security',     Icon: Wrench,   color: '#F87171', bg: 'rgba(248,113,113,0.08)', skills: portfolioData.skills.security },
+  { name: 'Integrations', Icon: Zap,      color: '#A78BFA', bg: 'rgba(167,139,250,0.08)', skills: portfolioData.skills.integrations },
+  { name: 'AI Tools',     Icon: Bot,      color: '#C9A84C', bg: 'rgba(201,168,76,0.08)',  skills: portfolioData.skills.aiTools },
 ]
 
 const extraSkills = [
@@ -61,51 +60,36 @@ export function Skills() {
     <section id="skills" className="py-24 relative" style={{ background: '#0D0D0D' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* ── Tech Stack: split layout ── */}
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-16 md:mb-24">
-
-          {/* Left: heading */}
+        {/* ── Tech Stack split layout ── */}
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-20">
           <motion.div
             ref={ref}
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#2A2A2A] mb-6"
-              style={{ background: '#111111' }}
-            >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#2A2A2A] mb-6" style={{ background: '#111111' }}>
               <span className="text-[#C9A84C]">✦</span>
               <span className="mono-text text-[10px] uppercase tracking-widest text-[#878787]">Tech Stack</span>
             </div>
-
             <h2 className="luxury-heading font-bold leading-tight mb-4">
               <span className="text-[#F0EDE8] text-3xl sm:text-4xl md:text-5xl block">Key Technologies</span>
               <span className="text-[#333333] text-3xl sm:text-4xl md:text-5xl italic block">&amp; Platforms</span>
             </h2>
-
             <p className="text-[#878787] text-sm leading-relaxed max-w-sm">
               A curated set of modern tools I use to build fast, scalable, and production-ready applications.
             </p>
           </motion.div>
 
-          {/* Right: 4 vertical scrolling columns */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <div
-              className="rounded-2xl p-5 overflow-hidden"
-              style={{ background: '#111111', border: '1px solid #1E1E1E', height: '360px' }}
-            >
-              {/* Top + bottom fade masks */}
+            <div className="rounded-2xl p-5 overflow-hidden" style={{ background: '#111111', border: '1px solid #1E1E1E', height: '360px' }}>
               <div className="relative h-full">
-                <div className="absolute inset-x-0 top-0 h-12 z-10 pointer-events-none"
-                  style={{ background: 'linear-gradient(to bottom, #111111, transparent)' }} />
-                <div className="absolute inset-x-0 bottom-0 h-12 z-10 pointer-events-none"
-                  style={{ background: 'linear-gradient(to top, #111111, transparent)' }} />
-
+                <div className="absolute inset-x-0 top-0 h-12 z-10 pointer-events-none" style={{ background: 'linear-gradient(to bottom, #111111, transparent)' }} />
+                <div className="absolute inset-x-0 bottom-0 h-12 z-10 pointer-events-none" style={{ background: 'linear-gradient(to top, #111111, transparent)' }} />
                 <div className="grid grid-cols-4 gap-3 h-full">
                   {iconColumns.map((col, colIdx) => {
                     const goUp = colIdx % 2 === 0
@@ -114,10 +98,7 @@ export function Skills() {
                       <div key={colIdx} className="overflow-hidden h-full">
                         <div className={goUp ? 'animate-scroll-up' : 'animate-scroll-down'}>
                           {doubled.map((icon, i) => (
-                            <div
-                              key={i}
-                              className="flex flex-col items-center gap-1.5 group cursor-default mb-3"
-                            >
+                            <div key={i} className="flex flex-col items-center gap-1.5 group cursor-default mb-3">
                               <div
                                 className="w-14 h-14 rounded-2xl flex items-center justify-center p-3 transition-transform duration-200 group-hover:scale-110"
                                 style={{ background: (icon as { dark?: boolean }).dark ? '#1E1E1E' : '#FFFFFF' }}
@@ -125,9 +106,7 @@ export function Skills() {
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src={icon.url} alt={icon.name} className="w-full h-full object-contain" loading="lazy" />
                               </div>
-                              <span className="mono-text text-[9px] text-[#4A4A4A] group-hover:text-[#C9A84C] transition-colors text-center leading-tight">
-                                {icon.name}
-                              </span>
+                              <span className="mono-text text-[9px] text-[#4A4A4A] group-hover:text-[#C9A84C] transition-colors text-center leading-tight">{icon.name}</span>
                             </div>
                           ))}
                         </div>
@@ -142,106 +121,52 @@ export function Skills() {
 
         {/* ── Section heading ── */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="mb-10"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-8"
         >
-          <span
-            className="mono-text text-[10px] uppercase tracking-[0.22em] mb-3 block"
-            style={{ color: '#C9A84C' }}
-          >
+          <span className="mono-text text-[10px] uppercase tracking-[0.22em] mb-2 block" style={{ color: '#C9A84C' }}>
             02 — Expertise
           </span>
-          <h2
-            className="font-bold leading-tight"
-            style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}
-          >
-            <span className="text-[#F0EDE8] text-3xl sm:text-4xl md:text-5xl block">Skills &amp;</span>
-            <span
-              className="text-3xl sm:text-4xl md:text-5xl block italic"
-              style={{ fontFamily: 'var(--font-playfair), Georgia, serif', color: '#5A5040' }}
-            >
-              Technologies
-            </span>
+          <h2 style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
+            <span className="font-bold text-[#E8E3DC] text-2xl sm:text-3xl md:text-4xl">Skills &amp; </span>
+            <span className="font-bold text-2xl sm:text-3xl md:text-4xl italic" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', color: '#6B5C38' }}>Technologies</span>
           </h2>
         </motion.div>
 
-        {/* ── Skill category cards ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-16">
-          {skillCategories.map((cat, i) => (
-            <motion.div
-              key={cat.name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.35 + i * 0.07 }}
-              className="group relative rounded-xl p-5 cursor-default overflow-hidden"
-              style={{
-                background: 'linear-gradient(145deg, #111111 0%, #0E0E0E 100%)',
-                border: '1px solid #1C1C1C',
-              }}
-            >
-              {/* Hover glow */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-xl"
-                style={{ background: 'radial-gradient(ellipse at 30% 0%, rgba(201,168,76,0.05) 0%, transparent 70%)' }}
-              />
-
-              {/* Category label row */}
-              <div className="flex items-center gap-2.5 mb-4">
-                <div
-                  className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                  style={{ background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.14)' }}
-                >
-                  <cat.icon size={13} style={{ color: '#C9A84C' }} />
-                </div>
-                <h3
-                  className="text-[10px] uppercase tracking-[0.18em] font-semibold"
-                  style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif', color: '#7A6840' }}
-                >
-                  {cat.name}
-                </h3>
-              </div>
-
-              {/* Thin gold divider */}
-              <div className="mb-4" style={{ height: '1px', background: 'linear-gradient(to right, rgba(201,168,76,0.2), transparent)' }} />
-
-              {/* Skills list */}
-              <ul className="space-y-2">
-                {cat.skills.map((skill) => (
-                  <li key={skill} className="flex items-center gap-2.5">
-                    <span
-                      className="shrink-0 rounded-full"
-                      style={{ width: 3, height: 3, background: '#3A3020' }}
-                    />
-                    <span
-                      className="text-[11.5px] leading-snug transition-colors duration-200 group-hover:text-[#C8C3BB]"
-                      style={{
-                        fontFamily: 'var(--font-inter), system-ui, sans-serif',
-                        color: '#6A6560',
-                        fontWeight: 400,
-                      }}
-                    >
-                      {skill}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
+        {/* ── Skill rows with color per category ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="rounded-2xl overflow-hidden mb-12"
+          style={{ border: '1px solid #1A1A1A', background: '#0B0B0B' }}
+        >
+          <div className="grid md:grid-cols-2 divide-y md:divide-y-0" style={{ '--tw-divide-opacity': 1 } as React.CSSProperties}>
+            {/* Left column */}
+            <div className="divide-y" style={{ borderRight: '1px solid #1A1A1A' }}>
+              {skillCategories.slice(0, 4).map((cat, i) => (
+                <SkillRow key={cat.name} cat={cat} i={i} inView={inView} />
+              ))}
+            </div>
+            {/* Right column */}
+            <div className="divide-y">
+              {skillCategories.slice(4).map((cat, i) => (
+                <SkillRow key={cat.name} cat={cat} i={i + 4} inView={inView} />
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
         {/* ── Also familiar with ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.9 }}
+          transition={{ duration: 0.6, delay: 0.95 }}
         >
-          <div className="flex items-center gap-3 mb-5">
-            <span
-              className="mono-text text-[10px] uppercase tracking-[0.2em]"
-              style={{ color: '#3A3020' }}
-            >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-[9px] uppercase tracking-[0.22em]" style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif', color: '#3A3530' }}>
               Also familiar with
             </span>
             <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, #1E1E1E, transparent)' }} />
@@ -250,20 +175,19 @@ export function Skills() {
             {extraSkills.map((skill, i) => (
               <motion.span
                 key={skill}
-                initial={{ opacity: 0, scale: 0.88 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.28, delay: 1 + i * 0.03 }}
-                className="cursor-default transition-all duration-200 hover:border-[#C9A84C]/30 hover:text-[#9A8B6A]"
+                transition={{ duration: 0.2, delay: 1 + i * 0.025 }}
+                className="cursor-default transition-all duration-200 hover:border-[#C9A84C] hover:text-[#C9A84C]"
                 style={{
                   fontFamily: 'var(--font-inter), system-ui, sans-serif',
                   fontSize: '10.5px',
-                  fontWeight: 400,
-                  color: '#4A4540',
+                  color: '#5A5550',
                   background: '#0E0E0E',
-                  border: '1px solid #1A1A1A',
+                  border: '1px solid #1E1E1E',
                   borderRadius: '6px',
                   padding: '4px 10px',
-                  letterSpacing: '0.02em',
+                  letterSpacing: '0.01em',
                 }}
               >
                 {skill}
@@ -271,7 +195,71 @@ export function Skills() {
             ))}
           </div>
         </motion.div>
+
       </div>
     </section>
+  )
+}
+
+function SkillRow({
+  cat,
+  i,
+  inView,
+}: {
+  cat: typeof skillCategories[0]
+  i: number
+  inView: boolean
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -8 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.4, delay: 0.45 + i * 0.06 }}
+      className="flex items-start gap-4 px-5 py-4 group transition-colors duration-200"
+      style={{ borderColor: '#1A1A1A' }}
+      onMouseEnter={e => (e.currentTarget.style.background = '#111111')}
+      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+    >
+      {/* Icon + label */}
+      <div className="flex items-center gap-2.5 w-32 shrink-0 pt-0.5">
+        <div
+          className="w-6 h-6 rounded-md flex items-center justify-center shrink-0"
+          style={{ background: cat.bg }}
+        >
+          <cat.Icon size={12} style={{ color: cat.color }} />
+        </div>
+        <span
+          className="text-[9.5px] uppercase tracking-[0.14em] font-semibold"
+          style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif', color: cat.color, opacity: 0.7 }}
+        >
+          {cat.name}
+        </span>
+      </div>
+
+      {/* Skills */}
+      <div className="flex flex-wrap gap-x-1 gap-y-1.5 pt-0.5">
+        {cat.skills.map((skill, si) => (
+          <span
+            key={skill}
+            className="inline-flex items-center gap-1"
+          >
+            {si > 0 && (
+              <span style={{ color: '#2A2A2A', fontSize: 10 }}>·</span>
+            )}
+            <span
+              style={{
+                fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                fontSize: '11.5px',
+                color: '#9A9390',
+                fontWeight: 400,
+                letterSpacing: '0.01em',
+              }}
+            >
+              {skill}
+            </span>
+          </span>
+        ))}
+      </div>
+    </motion.div>
   )
 }
