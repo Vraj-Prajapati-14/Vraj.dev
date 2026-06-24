@@ -1,9 +1,17 @@
 "use client"
 
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { MapPin, Award, ArrowRight, Briefcase, GraduationCap, ScrollText } from 'lucide-react'
 import { portfolioData } from '@/data/portfolio'
+
+const statsConfig = [
+  { target: 2,    suffix: '+', decimals: 0, label: 'Years Exp',  color: '#C9A84C' },
+  { target: 40,   suffix: '+', decimals: 0, label: 'APIs Built', color: '#60A5FA' },
+  { target: 3,    suffix: '',  decimals: 0, label: 'Platforms',  color: '#A78BFA' },
+  { target: 9.33, suffix: '',  decimals: 2, label: 'CGPA / 10',  color: '#34D399' },
+]
 
 const INTERESTS = [
   { icon: '⚡', label: 'API DESIGN' },
@@ -14,6 +22,36 @@ const INTERESTS = [
 export function About() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.06 })
   const [gridRef, gridInView] = useInView({ triggerOnce: true, threshold: 0.06 })
+
+  useEffect(() => {
+    if (!gridInView) return
+    import('animejs').then(({ animate }) => {
+      // Timeline vertical line draws in from top
+      animate('.timeline-line', {
+        scaleY: [0, 1],
+        duration: 1400,
+        delay: 400,
+        ease: 'inOutQuart',
+      })
+      // Stat counters start after cards appear
+      setTimeout(() => {
+        document.querySelectorAll<HTMLElement>('.stat-number').forEach((el) => {
+          const target = parseFloat(el.dataset.target || '0')
+          const suffix = el.dataset.suffix || ''
+          const decimals = parseInt(el.dataset.decimals || '0')
+          const obj = { val: 0 }
+          animate(obj, {
+            val: target,
+            duration: 1800,
+            ease: 'outExpo',
+            onUpdate: () => {
+              el.textContent = obj.val.toFixed(decimals) + suffix
+            },
+          })
+        })
+      }, 600)
+    })
+  }, [gridInView])
 
   return (
     <section id="about" className="relative" style={{ background: '#0A0A0A' }}>
@@ -173,12 +211,7 @@ export function About() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-12"
           >
-            {[
-              { val: '2+',   label: 'Years Exp',  color: '#C9A84C' },
-              { val: '40+',  label: 'APIs Built', color: '#60A5FA' },
-              { val: '3',    label: 'Platforms',  color: '#A78BFA' },
-              { val: '9.33', label: 'CGPA / 10',  color: '#34D399' },
-            ].map((s, i) => (
+            {statsConfig.map((s, i) => (
               <motion.div
                 key={s.label}
                 initial={{ opacity: 0, y: 12 }}
@@ -187,7 +220,15 @@ export function About() {
                 className="rounded-xl p-4 text-center"
                 style={{ background: '#0E0E0E', border: `1px solid ${s.color}25` }}
               >
-                <p className="text-2xl font-black leading-none mb-1" style={{ color: s.color }}>{s.val}</p>
+                <p
+                  className="stat-number text-2xl font-black leading-none mb-1"
+                  data-target={s.target}
+                  data-suffix={s.suffix}
+                  data-decimals={s.decimals}
+                  style={{ color: s.color }}
+                >
+                  0{s.suffix}
+                </p>
                 <p className="mono-text text-[9px] uppercase tracking-widest text-[#555050]">{s.label}</p>
               </motion.div>
             ))}
@@ -207,7 +248,11 @@ export function About() {
               </div>
 
               {/* Timeline */}
-              <div className="relative pl-6 border-l border-[#252525]">
+              <div className="relative pl-6">
+                <div
+                  className="timeline-line absolute left-0 top-0 bottom-0 w-px"
+                  style={{ background: '#252525', transform: 'scaleY(0)', transformOrigin: 'top' }}
+                />
                 {portfolioData.experience.map((exp, i) => (
                   <motion.div
                     key={i}

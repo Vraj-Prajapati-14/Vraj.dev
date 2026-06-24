@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Code, Database, Server, Cloud, Palette, Wrench, Zap, Bot } from 'lucide-react'
@@ -55,6 +56,28 @@ const extraSkills = [
 
 export function Skills() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.06 })
+  const hasAnimated = useRef(false)
+
+  useEffect(() => {
+    if (!inView || hasAnimated.current) return
+    hasAnimated.current = true
+    import('animejs').then(({ animate, stagger }) => {
+      animate('.skill-row', {
+        opacity: [0, 1],
+        translateX: [-14, 0],
+        delay: stagger(55, { start: 350 }),
+        duration: 500,
+        ease: 'outExpo',
+      })
+      animate('.extra-skill', {
+        opacity: [0, 1],
+        scale: [0.82, 1],
+        delay: stagger(22, { start: 850 }),
+        duration: 280,
+        ease: 'outBack',
+      })
+    })
+  }, [inView])
 
   return (
     <section id="skills" className="py-24 relative" style={{ background: '#0D0D0D' }}>
@@ -146,14 +169,14 @@ export function Skills() {
           <div className="grid md:grid-cols-2 divide-y md:divide-y-0" style={{ '--tw-divide-opacity': 1 } as React.CSSProperties}>
             {/* Left column */}
             <div className="divide-y" style={{ borderRight: '1px solid #1A1A1A' }}>
-              {skillCategories.slice(0, 4).map((cat, i) => (
-                <SkillRow key={cat.name} cat={cat} i={i} inView={inView} />
+              {skillCategories.slice(0, 4).map((cat) => (
+                <SkillRow key={cat.name} cat={cat} />
               ))}
             </div>
             {/* Right column */}
             <div className="divide-y">
-              {skillCategories.slice(4).map((cat, i) => (
-                <SkillRow key={cat.name} cat={cat} i={i + 4} inView={inView} />
+              {skillCategories.slice(4).map((cat) => (
+                <SkillRow key={cat.name} cat={cat} />
               ))}
             </div>
           </div>
@@ -172,13 +195,10 @@ export function Skills() {
             <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, #1E1E1E, transparent)' }} />
           </div>
           <div className="flex flex-wrap gap-2">
-            {extraSkills.map((skill, i) => (
-              <motion.span
+            {extraSkills.map((skill) => (
+              <span
                 key={skill}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.2, delay: 1 + i * 0.025 }}
-                className="cursor-default transition-all duration-200 hover:border-[#C9A84C] hover:text-[#C9A84C]"
+                className="extra-skill cursor-default transition-all duration-200 hover:border-[#C9A84C] hover:text-[#C9A84C]"
                 style={{
                   fontFamily: 'var(--font-inter), system-ui, sans-serif',
                   fontSize: '10.5px',
@@ -188,10 +208,12 @@ export function Skills() {
                   borderRadius: '6px',
                   padding: '4px 10px',
                   letterSpacing: '0.01em',
+                  opacity: 0,
+                  display: 'inline-block',
                 }}
               >
                 {skill}
-              </motion.span>
+              </span>
             ))}
           </div>
         </motion.div>
@@ -203,20 +225,13 @@ export function Skills() {
 
 function SkillRow({
   cat,
-  i,
-  inView,
 }: {
   cat: typeof skillCategories[0]
-  i: number
-  inView: boolean
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -8 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.4, delay: 0.45 + i * 0.06 }}
-      className="flex items-start gap-4 px-5 py-4 group transition-colors duration-200"
-      style={{ borderColor: '#1A1A1A' }}
+    <div
+      className="skill-row flex items-start gap-4 px-5 py-4 group transition-colors duration-200"
+      style={{ borderColor: '#1A1A1A', opacity: 0 }}
       onMouseEnter={e => (e.currentTarget.style.background = '#111111')}
       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
     >
@@ -260,6 +275,6 @@ function SkillRow({
           </span>
         ))}
       </div>
-    </motion.div>
+    </div>
   )
 }

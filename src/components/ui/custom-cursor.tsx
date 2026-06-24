@@ -8,12 +8,12 @@ export function CustomCursor() {
   const [visible, setVisible] = useState(false)
   const [clicked, setClicked] = useState(false)
   const [hovered, setHovered] = useState(false)
-  const pos = useRef({ x: -200, y: -200 })
-  const ring = useRef({ x: -200, y: -200 })
-  const rafId = useRef<number>(0)
+  const pos       = useRef({ x: -200, y: -200 })
+  const ring      = useRef({ x: -200, y: -200 })
+  const magnetEl  = useRef<HTMLElement | null>(null)
+  const rafId     = useRef<number>(0)
 
   useEffect(() => {
-    // Only show on pointer-fine (mouse) devices
     if (!window.matchMedia('(pointer: fine)').matches) return
 
     document.body.style.cursor = 'none'
@@ -26,13 +26,43 @@ export function CustomCursor() {
       }
     }
 
-    const onDown  = () => setClicked(true)
-    const onUp    = () => setClicked(false)
+    const onDown = (e: MouseEvent) => {
+      setClicked(true)
+      // Ripple effect at click point
+      import('animejs').then(({ animate }) => {
+        const ripple = document.createElement('div')
+        Object.assign(ripple.style, {
+          position: 'fixed',
+          left: `${e.clientX}px`,
+          top: `${e.clientY}px`,
+          width: '4px',
+          height: '4px',
+          borderRadius: '50%',
+          border: '1px solid rgba(201,168,76,0.75)',
+          pointerEvents: 'none',
+          zIndex: '9997',
+          transform: 'translate(-50%, -50%)',
+        })
+        document.body.appendChild(ripple)
+        animate(ripple, {
+          width: ['4px', '72px'],
+          height: ['4px', '72px'],
+          opacity: [0.75, 0],
+          duration: 580,
+          ease: 'outExpo',
+          onComplete: () => ripple.remove(),
+        })
+      })
+    }
 
-    // Detect hover over interactive elements
+    const onUp = () => setClicked(false)
+
+    // Detect hover — track the interactive element for magnetic pull
     const onOver = (e: MouseEvent) => {
       const el = e.target as HTMLElement
-      setHovered(!!el.closest('a, button, [role="button"]'))
+      const interactive = el.closest('a, button, [role="button"]') as HTMLElement | null
+      magnetEl.current = interactive
+      setHovered(!!interactive)
     }
 
     window.addEventListener('mousemove', onMove)
@@ -40,10 +70,27 @@ export function CustomCursor() {
     window.addEventListener('mouseup',   onUp)
     window.addEventListener('mouseover', onOver)
 
-    // RAF loop for smooth ring lag
+    // RAF loop — ring lags cursor; when over interactive element, ring is magnetically pulled
     const animate = () => {
-      ring.current.x += (pos.current.x - ring.current.x) * 0.12
-      ring.current.y += (pos.current.y - ring.current.y) * 0.12
+      let tx = pos.current.x
+      let ty = pos.current.y
+
+      if (magnetEl.current) {
+        try {
+          const rect = magnetEl.current.getBoundingClientRect()
+          if (rect.width > 0) {
+            const cx = rect.left + rect.width / 2
+            const cy = rect.top + rect.height / 2
+            tx = pos.current.x + (cx - pos.current.x) * 0.28
+            ty = pos.current.y + (cy - pos.current.y) * 0.28
+          }
+        } catch {
+          magnetEl.current = null
+        }
+      }
+
+      ring.current.x += (tx - ring.current.x) * 0.12
+      ring.current.y += (ty - ring.current.y) * 0.12
       if (ringRef.current) {
         ringRef.current.style.transform = `translate(${ring.current.x - 20}px, ${ring.current.y - 20}px)`
       }
